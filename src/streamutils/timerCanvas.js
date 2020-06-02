@@ -1,4 +1,3 @@
-let interval = null;
 export default function timerCanvas({
   isActive = true,
   height = 15,
@@ -6,6 +5,7 @@ export default function timerCanvas({
 }) {
   let fillStyle = 0;
   let ctx = null;
+  let interval = null;
 
   function clearCanvas() {
     // clear canvas
