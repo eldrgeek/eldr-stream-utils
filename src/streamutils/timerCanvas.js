@@ -1,5 +1,9 @@
 let interval = null;
-export default function timerCanvas({ height = 15, width = 40 }) {
+export default function timerCanvas({
+  isActive = true,
+  height = 15,
+  width = 40
+}) {
   let fillStyle = 0;
   let ctx = null;
 
@@ -17,7 +21,7 @@ export default function timerCanvas({ height = 15, width = 40 }) {
     ctx.fillRect(0, 0, 10, 10);
   }
   const FRAC = 10;
-  const FREQ = 1000;
+  const FREQ = 100;
   let seconds = 0;
   const draw = cnt => {
     let whole = Math.floor(cnt / FRAC);
@@ -33,11 +37,15 @@ export default function timerCanvas({ height = 15, width = 40 }) {
   canvas.width = width;
   canvas.height = height;
   ctx = canvas.getContext("2d");
+  if (interval) clearInterval(interval);
   // if (window.Xinterval) clearInterval(window.Xinterval);
-  interval = setInterval(() => {
-    seconds++;
-    draw(seconds);
-  }, FREQ);
+  if (isActive) {
+    seconds = 0;
+    interval = setInterval(() => {
+      seconds++;
+      draw(seconds);
+    }, FREQ);
+  }
   return canvas;
 }
 

@@ -1,7 +1,7 @@
 import React from "react";
 import timerCanvas from "./timerCanvas";
-const theCanvas = timerCanvas({});
-export default function TimerCanvas() {
+export default function TimerCanvas({ height = 50, isActive = true }) {
+  const theCanvas = timerCanvas({ height, isActive });
   return (
     <div
       ref={node => {
