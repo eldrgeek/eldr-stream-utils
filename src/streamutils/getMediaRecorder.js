@@ -1,4 +1,4 @@
-export default function getMediaRecorder() {
+export default function getMediaRecorder(stream) {
   // var mediaSource = new MediaSource();
   // mediaSource.addEventListener("sourceopen", handleSourceOpen, false);
   // function handleSourceOpen(event) {
@@ -21,7 +21,7 @@ export default function getMediaRecorder() {
   var options = { mimeType: "video/webm;codecs=vp9", bitsPerSecond: 100000 };
   let mediaRecorder = null;
   try {
-    mediaRecorder = new MediaRecorder(window.stream, options);
+    mediaRecorder = new MediaRecorder(stream, options);
   } catch (e0) {
     console.log(
       "Unable to create MediaRecorder with options Object: ",
@@ -30,7 +30,7 @@ export default function getMediaRecorder() {
     );
     try {
       options = { mimeType: "video/webm;codecs=vp8", bitsPerSecond: 100000 };
-      mediaRecorder = new MediaRecorder(window.stream, options);
+      mediaRecorder = new MediaRecorder(stream, options);
     } catch (e1) {
       console.log(
         "Unable to create MediaRecorder with options Object: ",
@@ -39,7 +39,7 @@ export default function getMediaRecorder() {
       );
       try {
         options = "video/mp4";
-        mediaRecorder = new MediaRecorder(window.stream, options);
+        mediaRecorder = new MediaRecorder(stream, options);
       } catch (e2) {
         alert("MediaRecorder is not supported by this browser.");
         console.error("Exception while creating MediaRecorder:", e2);
@@ -47,7 +47,6 @@ export default function getMediaRecorder() {
       }
     }
   }
-  debugger;
   console.log("Created MediaRecorder", mediaRecorder, "with options", options);
   return mediaRecorder;
 }

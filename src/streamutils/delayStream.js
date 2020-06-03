@@ -1,7 +1,7 @@
 import getMediaRecorder from "./getMediaRecorder";
 
 const delayStream = (stream, delay) => {
-  const mediaRecorder = getMediaRecorder();
+  const mediaRecorder = getMediaRecorder(stream);
   let recordedBlobs = [];
   const mimeType = "video/webm;codecs=vp9";
   console.log("delay");

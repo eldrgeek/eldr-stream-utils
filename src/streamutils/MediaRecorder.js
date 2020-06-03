@@ -24,7 +24,7 @@ import getMediaRecorder from "./getMediaRecorder";
 const main = theStream => {
   // var mediaSource = new MediaSource();
   // mediaSource.addEventListener("sourceopen", handleSourceOpen, false);
-
+  let myStream = null;
   var mediaRecorder;
   var recordedBlobs;
   var sourceBuffer;
@@ -64,6 +64,7 @@ const main = theStream => {
 
   function successCallback(stream) {
     window.stream = stream;
+    myStream = stream;
 
     window.theStream = theStream;
     const getTrack = () => {
@@ -120,8 +121,9 @@ const main = theStream => {
 
   // The nested try blocks will be simplified when Chrome 47 moves to Stable
   function startRecording() {
-    if (theStream) window.stream = theStream;
-    mediaRecorder = getMediaRecorder();
+    // if (theStream) window.stream = theStream;
+    console.log(window.stream, myStream, window.stream === myStream);
+    mediaRecorder = getMediaRecorder(myStream);
     recordedBlobs = [];
     // var options = { mimeType: "video/webm;codecs=vp9", bitsPerSecond: 100000 };
     // try {
