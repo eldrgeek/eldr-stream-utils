@@ -11,12 +11,12 @@ export default function StreamVideo({
   useEffect(() => {
     if (videoRef) {
       Promise.resolve(stream).then(stream => {
-        console.log(title + " stream", stream);
+        // console.log(title + " stream", stream);
         videoRef.current.srcObject = stream;
         videoRef.current.play();
       });
     }
-  }, [videoRef, stream]);
+  }, [videoRef, stream, title]);
   return (
     <div style={{ height: height + 20, width, display: displayMode }}>
       {/* <div style={{ position: "absolute" }}> */}
