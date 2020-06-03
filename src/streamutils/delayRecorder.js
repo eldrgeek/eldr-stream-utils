@@ -1,5 +1,5 @@
 export default (delayRecorder = () => {
-  const DELAY = 200;
+  const DELAY = 3000;
   const videos = [];
 
   const hide = el => (el.style.display = "none");

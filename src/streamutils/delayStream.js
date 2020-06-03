@@ -7,7 +7,6 @@ const delayStream = (stream, delay) => {
   console.log("delay");
   // mediaRecorder.onstop = handleStop;
   mediaRecorder.ondataavailable = handleDataAvailable;
-  mediaRecorder.start(delay); // collect 10ms of data
   // mediaRecorder.stop();
   const mediaSource = new MediaSource();
   const source = URL.createObjectURL(mediaSource);
@@ -15,6 +14,7 @@ const delayStream = (stream, delay) => {
   let sourceBuffer;
   mediaSource.addEventListener("sourceopen", () => {
     sourceBuffer = mediaSource.addSourceBuffer(mimeType);
+    mediaRecorder.start(delay); // collect 10ms of data
   });
   let gotOne = false;
   function handleDataAvailable(event) {

@@ -13,5 +13,8 @@ streams.combinedStream = combineStreams(
 );
 
 streams.splitStreams = splitStream(streams.combinedStream);
-// streams.delayStream = delayStream(streams.localStream,1000)
+setTimeout(() => {
+  console.log("timed out");
+  streams.delayStream = delayStream(streams.localStream, 1000);
+}, 2000);
 export default streams;
