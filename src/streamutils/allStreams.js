@@ -13,8 +13,9 @@ streams.combinedStream = combineStreams(
 );
 
 streams.splitStreams = splitStream(streams.combinedStream);
-setTimeout(() => {
+Promise.resolve(streams.localStream).then(async stream => {
+  console.log(stream);
   console.log("timed out");
-  // streams.delayStream = delayStream(streams.localStream, 1000);
-}, 2000);
+  streams.delayStream = await delayStream(stream, 1000);
+});
 export default streams;

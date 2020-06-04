@@ -18,6 +18,7 @@ export default function getMediaRecorder(stream) {
   //   );
   //   location.protocol = "HTTPS";
   // }
+  console.log("trying to get a stream");
   var options = { mimeType: "video/webm;codecs=vp9", bitsPerSecond: 100000 };
   let mediaRecorder = null;
   try {

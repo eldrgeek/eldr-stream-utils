@@ -12,8 +12,12 @@ export default function StreamVideo({
     if (videoRef) {
       Promise.resolve(stream).then(stream => {
         // console.log(title + " stream", stream);
-        videoRef.current.srcObject = stream;
-        videoRef.current.play();
+        try {
+          videoRef.current.srcObject = stream;
+          videoRef.current.play();
+        } catch (e) {
+          console.log("error with ", stream);
+        }
       });
     }
   }, [videoRef, stream, title]);

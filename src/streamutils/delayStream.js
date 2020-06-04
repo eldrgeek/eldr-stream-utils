@@ -1,18 +1,18 @@
 import getMediaRecorder from "./getMediaRecorder";
 
-const delayStream = (stream, delay) => {
+const delayStream = async (stream, delay) => {
   const mediaRecorder = getMediaRecorder(stream);
   let recordedBlobs = [];
   const mimeType = "video/webm;codecs=vp9";
   console.log("delay");
   // mediaRecorder.onstop = handleStop;
-  mediaRecorder.ondataavailable = handleDataAvailable;
   // mediaRecorder.stop();
   const mediaSource = new MediaSource();
-  const source = URL.createObjectURL(mediaSource);
-
+  let source = URL.createObjectURL(mediaSource);
+  // source = mediaSource
   let sourceBuffer;
   mediaSource.addEventListener("sourceopen", () => {
+    mediaRecorder.ondataavailable = handleDataAvailable;
     sourceBuffer = mediaSource.addSourceBuffer(mimeType);
     mediaRecorder.start(delay); // collect 10ms of data
   });
@@ -23,11 +23,12 @@ const delayStream = (stream, delay) => {
         gotOne = true;
         console.log("got one");
       }
+      debugger;
       recordedBlobs.push(event.data);
       sourceBuffer.appendBuffer(event.data);
     }
   }
-  console.log("source");
+  console.log("source", source);
   return source;
 };
 
