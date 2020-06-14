@@ -79,10 +79,12 @@ const main = theStream => {
         cloneVideo.srcObject = theStream;
       };
     };
-    if (theStream.active) {
-      getTrack();
-    } else {
-      theStream.onactive = getTrack();
+    if (theStream) {
+      if (theStream.active) {
+        getTrack();
+      } else {
+        theStream.onactive = getTrack();
+      }
     }
   }
   // window.xCS = gumVideo.captureSteam()

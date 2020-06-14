@@ -6,6 +6,8 @@ export default function StreamVideo({
   width = 50,
   height = 50
 }) {
+  if (!stream) return <div>{title}</div>;
+  // console.log("Strean ", title)
   const videoRef = useRef(null);
   const [displayMode, setDisplayMode] = useState("block");
   useEffect(() => {
@@ -16,7 +18,7 @@ export default function StreamVideo({
           videoRef.current.srcObject = stream;
           videoRef.current.play();
         } catch (e) {
-          console.log("error with ", stream);
+          console.log("StreamVideo error ", stream, e.toString());
         }
       });
     }

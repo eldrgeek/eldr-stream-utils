@@ -1,4 +1,4 @@
-export default (delayRecorder = () => {
+export default function delayRecorder() {
   const DELAY = 3000;
   const videos = [];
 
@@ -38,4 +38,4 @@ export default (delayRecorder = () => {
       window.setTimeout(initRecorder, DELAY / 2, stream);
     })
     .catch(console.error);
-});
+}

@@ -18,7 +18,7 @@ export default function getMediaRecorder(stream) {
   //   );
   //   location.protocol = "HTTPS";
   // }
-  console.log("trying to get a stream");
+  // console.log("getMediaRecorder trying to get a stream");
   var options = { mimeType: "video/webm;codecs=vp9", bitsPerSecond: 100000 };
   let mediaRecorder = null;
   try {
@@ -48,6 +48,6 @@ export default function getMediaRecorder(stream) {
       }
     }
   }
-  console.log("Created MediaRecorder", mediaRecorder, "with options", options);
+  // console.log("MediaRecorder Created MediaRecorder", mediaRecorder, "with options", options);
   return mediaRecorder;
 }

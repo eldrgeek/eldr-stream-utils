@@ -4,18 +4,20 @@ import combineStreams from "./combineStreams";
 import splitStream from "./splitStream";
 import delayStream from "./delayStream";
 
-const streams = {};
-streams.localStream = getLocalStream();
-streams.timerStream = timerCanvas({ height: 15 }).captureStream();
-streams.combinedStream = combineStreams(
-  streams.localStream,
-  streams.timerStream
-);
+export default async function getStreams() {
+  const streams = {};
 
-streams.splitStreams = splitStream(streams.combinedStream);
-Promise.resolve(streams.localStream).then(async stream => {
-  console.log(stream);
-  console.log("timed out");
-  streams.delayStream = await delayStream(stream, 1000);
-});
-export default streams;
+  streams.localStream = await getLocalStream();
+  streams.timerStream = await timerCanvas({ height: 15 }).captureStream();
+  streams.combinedStream = await combineStreams(
+    streams.localStream,
+    streams.timerStream
+  );
+  //   console.log("local", streams.localStream);
+
+  //   streams.splitStreams = await splitStream(streams.combinedStream);
+
+  //   streams.delayStream = await delayStream(streams.localStream, 500);
+  console.log("got stream", streams.timerStream);
+  return streams;
+}
