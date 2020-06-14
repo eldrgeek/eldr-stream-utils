@@ -13,11 +13,18 @@ export default async function getStreams() {
     streams.localStream,
     streams.timerStream
   );
-  //   console.log("local", streams.localStream);
+  streams.splitStreams = [];
+  console.log("about to test");
+  const test = new Promise(resolve => {
+    console.log("ready");
+    setTimeout(resolve, 1000, "stuff");
+  });
+  await test;
+  test.then(val => console.log("Test has resolved to ", val));
+  streams.splitStreams = await splitStream(streams.combinedStream);
+  console.log("split", streams.splitStreams);
 
-  //   streams.splitStreams = await splitStream(streams.combinedStream);
-
-  //   streams.delayStream = await delayStream(streams.localStream, 500);
-  console.log("got stream", streams.timerStream);
+  streams.delayStream = await delayStream(streams.localStream, 500);
+  console.log("returning", streams);
   return streams;
 }
