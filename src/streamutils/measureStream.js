@@ -8,16 +8,11 @@ export default function measureStream(stream) {
   video.srcObject = stream;
   const span = document.createElement("span");
   const root = document.getElementById("test");
-  const children = root.children;
-  for (let child of children) {
-    console.log("remove");
-    child.remove();
-  }
-  setTimeout(() => {
-    root.appendChild(canvas);
-    root.appendChild(video);
-    root.appendChild(span);
-  }, 1000);
+  root.innerHTML = "";
+
+  root.appendChild(canvas);
+  root.appendChild(video);
+  root.appendChild(span);
 
   video.addEventListener("play", () => {
     update();
