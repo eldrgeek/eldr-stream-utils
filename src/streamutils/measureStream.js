@@ -7,10 +7,16 @@ export default function measureStream(stream) {
   video.autoplay = true;
   video.srcObject = stream;
   const span = document.createElement("span");
+  const root = document.getElementById("test");
+  const children = root.children;
+  for (let child of children) {
+    console.log("remove");
+    child.remove();
+  }
   setTimeout(() => {
-    document.body.appendChild(canvas);
-    document.body.appendChild(video);
-    document.body.appendChild(span);
+    root.appendChild(canvas);
+    root.appendChild(video);
+    root.appendChild(span);
   }, 1000);
 
   video.addEventListener("play", () => {
@@ -24,7 +30,7 @@ export default function measureStream(stream) {
     let len = frame.length;
     let colors = {};
     for (let i = 0; i < len; i += 4) {
-      const color = (frame[i] * 16 + frame[i + 1]) * 16 + frame[i + 2];
+      const color = (frame[i] * 0xff + frame[i + 1]) * 0xff + frame[i + 2];
       if (!colors[color]) colors[color] = 0;
       colors[color]++;
 

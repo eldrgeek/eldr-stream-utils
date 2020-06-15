@@ -1,13 +1,14 @@
 import getMediaRecorder from "./getMediaRecorder";
 import defer from "./defer";
-var video3;
-video3 = document.createElement("video");
-// video3 = document.querySelector("#video3");
-video3.autoplay = video3.playsinline = video3.controls = true;
 
-export default function delayStream(stream, delay = 200, video = video3) {
+export default function delayStream(stream, delay = 200, video) {
+  if (!video) {
+    video = document.createElement("video");
+    // video3 = document.querySelector("#video3");
+    video.autoplay = video.playsinline = video.controls = true;
+  }
   const mediaSource = new MediaSource();
-  video3.src = window.URL.createObjectURL(mediaSource);
+  video.src = window.URL.createObjectURL(mediaSource);
   const recorder = getMediaRecorder(stream);
   mediaSource.onsourceopen = async function() {
     console.log("Added source buffer", mediaSource.sourceBuffers.length);
