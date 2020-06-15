@@ -3,7 +3,7 @@ import timerCanvas from "./timerCanvas";
 import combineStreams from "./combineStreams";
 import splitStream from "./splitStream";
 import delayStream from "./delayStream";
-
+import measureStream from "./measureStream";
 export default async function getStreams() {
   const streams = {};
 
@@ -13,6 +13,7 @@ export default async function getStreams() {
     streams.localStream,
     streams.timerStream
   );
+  measureStream(streams.timerStream);
   streams.splitStreams = [];
   console.log("about to test");
   const test = new Promise(resolve => {

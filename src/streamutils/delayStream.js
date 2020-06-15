@@ -33,7 +33,6 @@ export default function delayStream(stream, delay = 200, video = video3) {
       try {
         sourceBuffer3.appendBuffer(new Uint8Array(buffer));
       } catch (e) {
-        debugger;
         console.log("error ondatavailable ", e.toString());
       }
       await deferred.promise;
