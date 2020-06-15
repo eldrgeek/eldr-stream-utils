@@ -48,7 +48,9 @@ export default function timerCanvas({
   }
   return canvas;
 }
-
+timerCanvas.FREQ = 100;
+timerCanvas.FRAC = 10;
+timerCanvas.DELTA = 0x10;
 // if (module.hot) {
 //   module.hot.accept();
 //   module.hot.dispose(data => {

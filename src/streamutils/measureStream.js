@@ -1,3 +1,4 @@
+import {FRAC, FREQ, DELTA} from "./timerCanvas"
 export default function measureStream(stream) {
   const canvas = document.createElement("canvas");
   canvas.height = 15;

@@ -9,7 +9,7 @@ export default function StreamVideo({
   if (!stream) return <div>{title}</div>;
   // console.log("Strean ", title)
   const videoRef = useRef(null);
-  const [displayMode, setDisplayMode] = useState("block");
+  const [displayMode, setDisplayMode] = useState("inlineBlock");
   useEffect(() => {
     if (videoRef) {
       Promise.resolve(stream).then(stream => {
@@ -24,13 +24,20 @@ export default function StreamVideo({
     }
   }, [videoRef, stream, title]);
   return (
-    <div style={{ height: height + 20, width, display: displayMode }}>
+    <div
+      style={{
+        padding: "10px",
+        height: height + 20,
+        width,
+        display: displayMode
+      }}
+    >
       {/* <div style={{ position: "absolute" }}> */}
       {title ? title : "no title"}
       <video
         height={height}
         width={width}
-        onPlaying={() => setDisplayMode("block")}
+        onPlaying={() => setDisplayMode("inline-block")}
         ref={videoRef}
         crossOrigin="anonymous"
         autoPlay

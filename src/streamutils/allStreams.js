@@ -13,7 +13,6 @@ export default async function getStreams() {
     streams.localStream,
     streams.timerStream
   );
-  measureStream(streams.timerStream);
   streams.splitStreams = [];
   console.log("about to test");
   const test = new Promise(resolve => {
@@ -24,8 +23,14 @@ export default async function getStreams() {
   test.then(val => console.log("Test has resolved to ", val));
   streams.splitStreams = await splitStream(streams.combinedStream);
   console.log("split", streams.splitStreams);
-
-  streams.delayStream = await delayStream(streams.localStream, 500);
+  
+  // streams.delayStream1 = await delayStream(streams.localStream, 500);
+  streams.delayStream1 = await delayStream(streams.combinedStream, 500);
+  
+  // streams.delayStream2 = await delayStream(streams.combinedStream, 1000);
+  // streams.delayStream3 = await delayStream(streams.combinedStream, 250);
   console.log("returning", streams);
+  measureStream(await streams.timerStream)
+  // measureStream(await splitStream(streams.delayStream1)[1])
   return streams;
 }
