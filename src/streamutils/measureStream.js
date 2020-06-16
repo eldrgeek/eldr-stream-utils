@@ -1,14 +1,21 @@
-import {FRAC, FREQ, DELTA} from "./timerCanvas"
-export default function measureStream(stream) {
+import timerCanvas from "./timerCanvas";
+import splitStream from "./splitStream";
+const FREQ = timerCanvas.FREQ;
+const FRAC = timerCanvas.FRAC;
+const DELTA = timerCanvas.DELTA;
+export default async function measureStream(stream, name) {
   const canvas = document.createElement("canvas");
   canvas.height = 15;
   const ctx = canvas.getContext("2d");
   const video = document.createElement("video");
   video.height = 15;
   video.autoplay = true;
+  const streams = await splitStream(stream);
+  stream = streams[1];
+  console.log("stream", name, stream);
   video.srcObject = stream;
   const span = document.createElement("span");
-  const root = document.getElementById("test");
+  const root = document.getElementById(name);
   root.innerHTML = "";
 
   root.appendChild(canvas);

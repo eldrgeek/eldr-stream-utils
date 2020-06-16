@@ -3,7 +3,7 @@ import "./styles.css";
 import TimerCanvas from "./streamutils/ReactTimerCanvas";
 import StreamVideo from "./streamutils/StreamVideo";
 import getAllStreams from "./streamutils/allStreams";
-import MediaRecorder from "./streamutils/MediaRecorder";
+// import MediaRecorder from "./streamutils/MediaRecorder";
 // import delayRecorder from "./streamutils/delayRecorder";
 // delayRecorder();
 export default function App() {
@@ -32,8 +32,12 @@ export default function App() {
         {/* <MediaRecorder stream={allStreams.localStream} />
       {/* <StreamVideo title="live" stream={allStreams.localStream} /> */}
       </div>
-      {allStreams.delayStream1 ? (
-        <StreamVideo title="delayed 1" stream={allStreams.delayStream1} />
+      {allStreams.delayStream3 ? (
+        <React.Fragment>
+          <StreamVideo title="delayed 1" stream={allStreams.delayStream1} />
+          <StreamVideo title="delayed 2" stream={allStreams.delayStream2} />
+          <StreamVideo title="delayed 3" stream={allStreams.delayStream3} />
+        </React.Fragment>
       ) : null}
     </React.Fragment>
   );

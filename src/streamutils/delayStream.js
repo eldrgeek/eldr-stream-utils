@@ -27,6 +27,9 @@ export default function delayStream(stream, delay = 200, video) {
       mediaSource.endOfStream();
     };
     // let block = 0;
+    let nErrors = 0;
+    let reportErrors = null;
+    let lastErrors = 0;
     recorder.ondataavailable = async e => {
       // console.log("data", ++block);
       deferred = defer();
@@ -34,7 +37,18 @@ export default function delayStream(stream, delay = 200, video) {
       try {
         sourceBuffer3.appendBuffer(new Uint8Array(buffer));
       } catch (e) {
-        console.log("error ondatavailable ", e.toString());
+        if (!reportErrors) {
+          console.log("error ondatavailable ", e.toString());
+          reportErrors = setInterval(() => {
+            if (nErrors === lastErrors) {
+              clearInterval(reportErrors);
+              reportErrors = null;
+            } else {
+              lastErrors = nErrors;
+            }
+          }, 10000);
+        }
+        nErrors++;
       }
       await deferred.promise;
       // if(block <= N_BLOCKS) recorder.resume()
@@ -43,6 +57,7 @@ export default function delayStream(stream, delay = 200, video) {
       deferred.resolve();
     };
     // fillBuffer(sourceBuffer3, mediaSource)
+    console.log("delay", delay);
     if (stream.getTracks().length !== 0) {
       recorder.start(delay);
     } else {
